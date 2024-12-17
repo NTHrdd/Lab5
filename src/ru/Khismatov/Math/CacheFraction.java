@@ -35,8 +35,7 @@ public class CacheFraction implements FractionInterface {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || !(obj instanceof CacheFraction)) return false;
-        CacheFraction other = (CacheFraction) obj;
-        return this.fraction.equals(other.fraction);
+        if (!(obj instanceof CacheFraction)) return false;
+        return this.fraction.equals(((CacheFraction) obj).fraction);
     }
 }

@@ -85,8 +85,8 @@ public class Main {
                                         new Point(3, 4),
                                         new Point(0, -3),
                                         new Point(5, 6))
-                                    .map(p -> new Point(p.x(), Math.abs(p.y())))
                                     .distinct()
+                                    .map(p -> new Point(p.x(), Math.abs(p.y())))
                                     .sorted(Comparator.comparingDouble(Point::x))
                                     .collect(Collectors.toList())
                     );
@@ -99,8 +99,11 @@ public class Main {
                             .filter(parts -> parts.length == 2 && !parts[1].isEmpty())
                             .collect(Collectors.groupingBy(
                                     parts -> Integer.parseInt(parts[1]),
-                                    TreeMap::new,
-                                    Collectors.mapping(parts -> parts[0].substring(0, 1).toUpperCase() + parts[0].substring(1).toLowerCase(), Collectors.toList())
+                                    HashMap::new,
+                                    Collectors.mapping(
+                                            parts -> parts[0].substring(0, 1).toUpperCase() + parts[0].substring(1).toLowerCase(),
+                                            Collectors.toList()
+                                    )
                             ));
                     System.out.println(groupedPeople);
                     break;
