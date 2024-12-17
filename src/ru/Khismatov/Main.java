@@ -32,6 +32,7 @@ public class Main {
                     fraction.setNumerator(scan.nextInt());
                     fraction.setDenominator(scan.nextInt());
                     System.out.println("Value of Fraction: " + fraction + " and " + fraction.getValue());
+                    System.out.println("Value of Fraction: " + fraction + " and " + fraction.getValue());
                     break;
                 case 2:
                     Meowable cat = createCat("Барсик");
@@ -49,23 +50,16 @@ public class Main {
                     System.out.println("List which contain elements of first array and doesnt contain elements of second array: " + formList(l1, l2));
                     break;
                 case 4:
-                    /*7
-Иванов Сергей 51 95
-Петров Алексей 50 95
-Сергеев Иван 50 95
-Кузнецова Анна 50 95
-Николаев Дмитрий 50 80
-Сидоров Алексей 50 88
-Марков Николай 51 85
-                    */
-                    System.out.println("Enter number of students and students scores: ");
-                    Map<Integer, List<Student>> students = scanStudents(scan.nextInt());
+                    System.out.println("Enter path of file: ");
+                    Map<Integer, List<Student>> students = scanStudents("src/ru/Khismatov/task4.txt");
                     System.out.println("Enter number of school: ");
                     getBestScore(getStudentsOfNeededSchool(scan.nextInt(), students));
                     break;
                 case 5:
                     System.out.println("Enter path of file: ");
-                    System.out.println("Number russian letters which not found on text file: " + countCharNotInText("src/ru/Khismatov/task5.txt"));
+                    //src/ru/Khismatov/task5.txt
+                    scan.nextLine();
+                    System.out.println("Number russian letters which not found on text file: " + countCharNotInText(scan.nextLine()));
                     break;
                 case 6:
                     Queue<Integer> queue = new LinkedList<>();
@@ -85,8 +79,8 @@ public class Main {
                                         new Point(3, 4),
                                         new Point(0, -3),
                                         new Point(5, 6))
-                                    .distinct()
                                     .map(p -> new Point(p.x(), Math.abs(p.y())))
+                                    .distinct()
                                     .sorted(Comparator.comparingDouble(Point::x))
                                     .collect(Collectors.toList())
                     );

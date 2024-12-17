@@ -1,16 +1,18 @@
 package ru.Khismatov.Analys;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class TopStudents {
-    public static Map<Integer, List<Student>> scanStudents(int countStudents) {
+    public static Map<Integer, List<Student>> scanStudents(String filePath) throws IOException {
         Map<Integer, List<Student>> schoolMap = new HashMap<>();
-        Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < countStudents; i++) {
-            String[] input = scanner.nextLine().split(" ");
-            schoolMap.putIfAbsent(Integer.parseInt(input[2]), new ArrayList<>());
-            schoolMap.get(Integer.parseInt(input[2])).add(new Student(input[0], input[1], Integer.parseInt(input[2]), Integer.parseInt(input[3])));
-        }
+        Files.lines(Paths.get(filePath)).skip(1).forEach(line -> {
+                    String[] input = line.split(" ");
+                    schoolMap.putIfAbsent(Integer.parseInt(input[2]), new ArrayList<>());
+                    schoolMap.get(Integer.parseInt(input[2])).add(new Student(input[0], input[1], Integer.parseInt(input[2]), Integer.parseInt(input[3])));
+                });
         return schoolMap;
     }
 

@@ -11,6 +11,7 @@ public class CacheFraction implements FractionInterface {
     public double getValue() {
         if (cachedValue == null) {
             cachedValue = (double) fraction.getValue();
+            System.out.println("Aboba");
         }
         return cachedValue;
     }
