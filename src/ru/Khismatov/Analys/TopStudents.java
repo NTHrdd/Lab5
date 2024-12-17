@@ -6,39 +6,34 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class TopStudents {
-    public static Map<Integer, List<Student>> scanStudents(String filePath) throws IOException {
-        Map<Integer, List<Student>> schoolMap = new HashMap<>();
+    public static TreeMap<Integer, List<Student>> scanStudents(String filePath, int neededSchool) throws IOException {
+        TreeMap<Integer, List<Student>> schoolMap = new TreeMap<>();
         Files.lines(Paths.get(filePath)).skip(1).forEach(line -> {
                     String[] input = line.split(" ");
-                    schoolMap.putIfAbsent(Integer.parseInt(input[2]), new ArrayList<>());
-                    schoolMap.get(Integer.parseInt(input[2])).add(new Student(input[0], input[1], Integer.parseInt(input[2]), Integer.parseInt(input[3])));
+                    if (Integer.parseInt(input[2]) == neededSchool) {
+                        schoolMap.putIfAbsent(Integer.parseInt(input[3]), new ArrayList<>());
+                        schoolMap.get(Integer.parseInt(input[3])).add(new Student(input[0], input[1]));
+                    }
                 });
         return schoolMap;
     }
 
-    public static List<Student> getStudentsOfNeededSchool(int school, Map<Integer, List<Student>> schoolMap) {
-        List<Student> schoolStudents = schoolMap.getOrDefault(school, new ArrayList<>());
-        schoolStudents.sort((s1, s2) -> Integer.compare(s2.score(), s1.score()));
-        return schoolStudents;
-    }
 
-    public static void getBestScore(List<Student> students) {
-        int maxScore = students.get(0).score();
-        int countMaxScore = 0;
-        for (Student s : students) {
-            if (s.score() == maxScore) {countMaxScore++;}
-            else {break;}
-        }
-        if (countMaxScore > 2) {
-            System.out.println("Number of students who scored the best score : ");
-            System.out.println(countMaxScore);
-        } else if (countMaxScore == 1 && students.size() > 1) {
-            System.out.println("Best score: ");
-            System.out.println(students.get(0).surname() + " " + students.get(0).name());
+    public static void getBestScore(TreeMap<Integer, List<Student>> students) {
+        int maxScore = students.lastKey();
+        List<Student> topStudents = students.get(maxScore);
+        if (topStudents.size() > 2) {
+            System.out.println("Number of students who scored the best score:");
+            System.out.println(topStudents.size());
+        } else if (topStudents.size() == 1 && students.size() > 1) {
+            System.out.println("Best score:");
+            Student student = topStudents.get(0);
+            System.out.println(student.surname() + " " + student.name());
         } else {
-            System.out.println("Best score: ");
-            System.out.println(students.get(0).surname() + " " + students.get(0).name());
-            System.out.println(students.get(1).surname() + " " + students.get(1).name());
+            System.out.println("Best score:");
+            for (Student student : topStudents) {
+                System.out.println(student.surname() + " " + student.name());
+            }
         }
     }
 }

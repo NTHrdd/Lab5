@@ -1,4 +1,4 @@
-package ru.Khismatov.Math;
+package ru.Khismatov.Math.Fraction;
 
 public class CacheFraction implements FractionInterface {
     private final FractionInterface fraction;

@@ -1,8 +1,8 @@
-package ru.Khismatov.Math;
+package ru.Khismatov.Math.Fraction;
 
 import java.util.Objects;
 
-public final class Fraction implements Cloneable, FractionInterface{
+public final class Fraction implements Cloneable, FractionInterface {
     private int numerator;
     private int denominator;
 

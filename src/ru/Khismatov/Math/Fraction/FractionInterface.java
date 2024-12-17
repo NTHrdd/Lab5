@@ -1,4 +1,4 @@
-package ru.Khismatov.Math;
+package ru.Khismatov.Math.Fraction;
 
 public interface FractionInterface {
         void setNumerator(int numerator);

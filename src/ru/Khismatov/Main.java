@@ -1,8 +1,7 @@
 package ru.Khismatov;
 
-import ru.Khismatov.Analys.Student;
 import ru.Khismatov.Cat.*;
-import ru.Khismatov.Math.FractionInterface;
+import ru.Khismatov.Math.Fraction.FractionInterface;
 import ru.Khismatov.Math.Geometry.Point;
 import ru.Khismatov.Math.Geometry.Polyline;
 
@@ -14,7 +13,7 @@ import java.util.stream.*;
 import static ru.Khismatov.Analys.TopStudents.*;
 import static ru.Khismatov.Cat.CatFactory.createCat;
 import static ru.Khismatov.CollectionUtils.CollectionUtils.*;
-import static ru.Khismatov.Math.FractionFactory.createFraction;
+import static ru.Khismatov.Math.Fraction.FractionFactory.createFraction;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -50,16 +49,13 @@ public class Main {
                     System.out.println("List which contain elements of first array and doesnt contain elements of second array: " + formList(l1, l2));
                     break;
                 case 4:
-                    System.out.println("Enter path of file: ");
-                    Map<Integer, List<Student>> students = scanStudents("src/ru/Khismatov/task4.txt");
-                    System.out.println("Enter number of school: ");
-                    getBestScore(getStudentsOfNeededSchool(scan.nextInt(), students));
+                    System.out.println("Enter path of file and number of school: ");
+                    getBestScore(scanStudents("src/ru/Khismatov/task4.txt", scan.nextInt()));
                     break;
                 case 5:
                     System.out.println("Enter path of file: ");
-                    //src/ru/Khismatov/task5.txt
                     scan.nextLine();
-                    System.out.println("Number russian letters which not found on text file: " + countCharNotInText(scan.nextLine()));
+                    System.out.println("Number russian letters which not found on text file: " + countCharNotInText("src/ru/Khismatov/task5.txt"));
                     break;
                 case 6:
                     Queue<Integer> queue = new LinkedList<>();

@@ -1,4 +1,4 @@
-package ru.Khismatov.Math;
+package ru.Khismatov.Math.Fraction;
 
 public class FractionFactory {
     public static FractionInterface createFraction(int numerator, int denominator) {
