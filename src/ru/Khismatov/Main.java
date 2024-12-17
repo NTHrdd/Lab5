@@ -102,7 +102,9 @@ public class Main {
                                     Collectors.mapping(parts -> parts[0].substring(0, 1).toUpperCase() + parts[0].substring(1).toLowerCase(), Collectors.toList())
                             ));
                     System.out.println(groupedPeople);
+                    break;
             }
         } while (n != 9);
+        scan.close();
     }
 }
