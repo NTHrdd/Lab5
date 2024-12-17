@@ -1,6 +1,6 @@
 package ru.Khismatov.Cat;
 
-public class MeowCounter {
+public class MeowCounter implements Meowable {
     private int meowCount;
     private final Meowable cat;
 

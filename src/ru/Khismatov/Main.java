@@ -2,7 +2,7 @@ package ru.Khismatov;
 
 import ru.Khismatov.Analys.Student;
 import ru.Khismatov.Cat.*;
-import ru.Khismatov.Math.Fraction;
+import ru.Khismatov.Math.FractionInterface;
 import ru.Khismatov.Math.Geometry.Point;
 import ru.Khismatov.Math.Geometry.Polyline;
 
@@ -12,7 +12,9 @@ import java.nio.file.*;
 import java.util.stream.*;
 
 import static ru.Khismatov.Analys.TopStudents.*;
+import static ru.Khismatov.Cat.CatFactory.createCat;
 import static ru.Khismatov.CollectionUtils.CollectionUtils.*;
+import static ru.Khismatov.Math.FractionFactory.createFraction;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -24,7 +26,7 @@ public class Main {
             switch(n){
                 case 1:
                     System.out.println("Enter fraction in style(a b): ");
-                    Fraction fraction = new Fraction(scan.nextInt(), scan.nextInt());
+                    FractionInterface fraction = createFraction(scan.nextInt(), scan.nextInt());
                     System.out.println("Value of Fraction: " + fraction.getValue());
                     System.out.println("Enter new values of numerator and denominator: ");
                     fraction.setNumerator(scan.nextInt());
@@ -32,13 +34,12 @@ public class Main {
                     System.out.println("Value of Fraction: " + fraction + " and " + fraction.getValue());
                     break;
                 case 2:
-                    Meowable cat = new Cat("Барсик");
-                    MeowCounter tracker = new MeowCounter(cat);
-                    tracker.meow();
-                    tracker.meow();
-                    tracker.meow();
-                    tracker.meow();
-                    System.out.println("Cat meows " + tracker.getMeowCount() + " times");
+                    Meowable cat = createCat("Барсик");
+                    cat.meow();
+                    cat.meow();
+                    cat.meow();
+                    cat.meow();
+                    System.out.println("Cat meows " + ((MeowCounter)cat).getMeowCount() + " times");
                     break;
                 case 3:
                     scan.nextLine();

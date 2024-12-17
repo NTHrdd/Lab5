@@ -2,10 +2,9 @@ package ru.Khismatov.Math;
 
 import java.util.Objects;
 
-public final class Fraction extends Number implements Cloneable, FractionInterface {
+public final class Fraction implements Cloneable, FractionInterface{
     private int numerator;
     private int denominator;
-    private Double cachedValue = null;
 
     public Fraction(int numerator, int denominator) {
         if (denominator == 0) {throw new IllegalArgumentException("Denominator cannot be zero");}
@@ -25,15 +24,13 @@ public final class Fraction extends Number implements Cloneable, FractionInterfa
             denominator = -denominator;
         }
     }
-
-    private void invalidateCache(){cachedValue = null;}
+    @Override
+    public double getValue(){
+        return (double) numerator / denominator;
+    }
 
     @Override
-    public void setNumerator(int numerator) {
-        this.numerator = numerator;
-        simplify();
-        invalidateCache();
-    }
+    public void setNumerator(int numerator) {this.numerator = numerator;simplify();}
 
     @Override
     public void setDenominator(int denominator) {
@@ -42,46 +39,7 @@ public final class Fraction extends Number implements Cloneable, FractionInterfa
         }
         this.denominator = denominator;
         simplify();
-        invalidateCache();
     }
-
-    public double getValue() {
-        if (cachedValue == null) {
-            cachedValue = (double) numerator / denominator;
-        }
-        return cachedValue;
-    }
-
-    public Fraction sum(Fraction other) {return new Fraction(this.numerator * other.denominator + this.denominator * other.numerator, this.denominator * other.denominator);}
-
-    public Fraction sum(int value) {return new Fraction(this.numerator + this.denominator * value, this.denominator);}
-
-    public Fraction minus(Fraction other) {return new Fraction(numerator * other.denominator - this.denominator * other.numerator, this.denominator * other.denominator);}
-
-    public Fraction minus(int value) {return new Fraction(this.numerator - this.denominator * value, this.denominator);}
-
-    public Fraction multiply(Fraction other) {return new Fraction(this.numerator * other.numerator, this.denominator * other.denominator);}
-
-    public Fraction multiply(int value) {return new Fraction(this.numerator * value, this.denominator);}
-
-    public Fraction divide(Fraction other) {return new Fraction(this.numerator * other.denominator, this.denominator * other.numerator);}
-
-    public Fraction divide(int value) {return new Fraction(this.numerator, this.denominator * value);}
-
-    @Override
-    public String toString() {return numerator + "/" + denominator;}
-
-    @Override
-    public int intValue() {return numerator/denominator;}
-
-    @Override
-    public long longValue() {return (long) numerator/denominator;}
-
-    @Override
-    public float floatValue() {return (float) numerator/denominator;}
-
-    @Override
-    public double doubleValue() {return (double) numerator/denominator;}
 
     @Override
     public int hashCode() {return Objects.hash(numerator, denominator);}
@@ -96,11 +54,12 @@ public final class Fraction extends Number implements Cloneable, FractionInterfa
     @Override
     public Fraction clone() {
         try{
-            Fraction cloned  = (Fraction) super.clone();
-            cloned.cachedValue = this.cachedValue;
-            return cloned;
+            return (Fraction) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String toString() {return numerator + "/" + denominator;}
 }
